@@ -28,6 +28,7 @@ namespace Excel_generálás
         {
             InitializeComponent();
             LoadData();
+            CreateExcel();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,7 +53,7 @@ namespace Excel_generálás
                 //Új sheet létrehozása
                 xlSheet = xlWb.ActiveSheet;
 
-                //CreateTable();
+                CreateTable();
 
                 //Control átadása a felhasználónak
                 xlApp.Visible = true;
@@ -99,15 +100,27 @@ namespace Excel_generálás
             int row = 0;
             foreach (Flat f in Flats)
             {
+
+                string ev;
+                
+                if (f.Elevator)                    
+                {
+                    ev = "Van";
+                }
+                else
+                {
+                    ev = "Nincs";
+                }
+
                 values[row, 0] = f.Code;
                 values[row, 1] = f.Vendor;
                 values[row, 2] = f.Side;
                 values[row, 3] = f.District;
-                values[row, 4] = f.Elevator;
+                values[row, 4] = ev;
                 values[row, 5] = f.NumberOfRooms;
                 values[row, 6] = f.FloorArea;
                 values[row, 7] = f.Price;
-                values[row, 8] = string.Format("={0}/{1}",GetCell(row,8), GetCell(row,7));
+                values[row, 8] = string.Format("={0}/{1}*1000000",GetCell(row+2,8), GetCell(row+2,7));
 
                 row++;
             };
@@ -115,7 +128,17 @@ namespace Excel_generálás
             Excel.Range r = xlSheet.Range[GetCell(2, 1), GetCell(1 + values.GetLength(0), values.GetLength(1))];
 
             r.Value2 = values;
-            
+
+
+            Excel.Range hdr = xlSheet.Range["A1", GetCell(1,values.GetLength(1))];
+
+            hdr.Font.Bold = true;
+            hdr.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
+            hdr.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            hdr.EntireColumn.AutoFit();
+            hdr.RowHeight = 40;
+            hdr.Interior.Color = Color.LightBlue;
+            hdr.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
 
 
         }
