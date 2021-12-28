@@ -18,6 +18,11 @@ namespace Excel_generálás
         RealEstateEntities context = new RealEstateEntities();
         List<Flat> Flats;
 
+        Excel.Application xlApp;
+        Excel.Workbook xlWb;
+        Excel.Worksheet xlSheet;
+
+
 
         public Form1()
         {
@@ -35,6 +40,36 @@ namespace Excel_generálás
 
             Flats = context.Flats.ToList();
 
+        }
+
+        private void CreateExcel()
+        {
+            try
+            {   //Excel indítása
+                xlApp = new Excel.Application();
+                //Excel workbook létrehozása
+                xlWb = xlApp.Workbooks.Add(Missing.Value);
+                //Új sheet létrehozása
+                xlSheet = xlWb.ActiveSheet;
+
+                //CreateTable();
+
+                //Control átadása a felhasználónak
+                xlApp.Visible = true;
+                xlApp.UserControl = true
+            }
+            catch (Exception ex)
+            {
+                string errMsg = string.Format("Error: {0}\nline: {1}", ex.Message, ex.Source);
+                MessageBox.Show(errMsg, "Error");
+
+                //Hiba esetén automatikus bezárás
+                xlWb.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWb = null;
+                xlApp = null;
+               
+            }
         }
     }
 }
