@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace UserMaintenance
             InitializeComponent();
             label1.Text = Resource1.FullName;            
             button1.Text = Resource1.Add;
+            button2.Text = Resource1.Export;
 
             //#6/2
             listBox1.DataSource = users;
@@ -47,9 +49,36 @@ namespace UserMaintenance
             users.Add(u);        
         }
 
-       
+        //#9
+        private void ExportCSV(object sender, EventArgs e)
+        {
+            SaveFileDialog sfDial1 = new SaveFileDialog();
+            
+            string filter = "CSV file (*.csv)|*.csv| All Files (*.*)|*.*";
+            sfDial1.Filter = filter;
 
-        
+            string fileName = sfDial1.FileName;
+
+            
+
+            if (sfDial1.ShowDialog() == DialogResult.OK)                
+            {
+                filter = sfDial1.FileName;
+
+                StreamWriter sw = new StreamWriter(filter);
+
+                foreach (User s in users) {
+
+                    sw.WriteLine("{0},{1},", s.ID, s.FullName);                    
+                }
+
+                sw.Close();       
+            }
+        }
+
+
+
+
 
 
 
