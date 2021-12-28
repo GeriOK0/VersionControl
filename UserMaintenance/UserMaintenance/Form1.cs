@@ -22,9 +22,10 @@ namespace UserMaintenance
         public Form1()
         {
             InitializeComponent();
-            label1.Text = Resource1.FullName;            
+            label1.Text = Resource1.FullName;
             button1.Text = Resource1.Add;
             button2.Text = Resource1.Export;
+            button3.Text = Resource1.Dlt;
 
             //#6/2
             listBox1.DataSource = users;
@@ -41,46 +42,51 @@ namespace UserMaintenance
         //#6/3
         private void AddUser(object sender, EventArgs e)
         {
-            
+
             var u = new User()
             {
-                FullName = textBox1.Text,                
+                FullName = textBox1.Text,
             };
-            users.Add(u);        
+            users.Add(u);
         }
 
         //#9
         private void ExportCSV(object sender, EventArgs e)
         {
             SaveFileDialog sfDial1 = new SaveFileDialog();
-            
+
             string filter = "CSV file (*.csv)|*.csv| All Files (*.*)|*.*";
             sfDial1.Filter = filter;
 
             string fileName = sfDial1.FileName;
 
-            
 
-            if (sfDial1.ShowDialog() == DialogResult.OK)                
+
+            if (sfDial1.ShowDialog() == DialogResult.OK)
             {
                 filter = sfDial1.FileName;
 
                 StreamWriter sw = new StreamWriter(filter);
 
-                foreach (User s in users) {
+                foreach (User s in users)
+                {
 
-                    sw.WriteLine("{0},{1},", s.ID, s.FullName);                    
+                    sw.WriteLine("{0},{1},", s.ID, s.FullName);
                 }
 
-                sw.Close();       
+                sw.Close();
             }
         }
 
+        //#11
+        private void DeleteUser(object sender, EventArgs e)
+        {
+            var i = listBox1.SelectedIndex;
 
+            users.RemoveAt(i);
 
+            listBox1.Refresh();
 
-
-
-
+        }
     }
 }

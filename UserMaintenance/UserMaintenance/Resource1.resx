@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Hozzáadás</value>
   </data>
+  <data name="Dlt" xml:space="preserve">
+    <value>Kijelölt törlése</value>
+  </data>
   <data name="Export" xml:space="preserve">
     <value>Fájlba írás</value>
   </data>

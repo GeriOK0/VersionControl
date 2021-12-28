@@ -70,6 +70,15 @@ namespace UserMaintenance {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kijelölt törlése.
+        /// </summary>
+        internal static string Dlt {
+            get {
+                return ResourceManager.GetString("Dlt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fájlba írás.
         /// </summary>
         internal static string Export {
