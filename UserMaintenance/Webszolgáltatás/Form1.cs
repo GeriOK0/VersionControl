@@ -18,32 +18,30 @@ namespace Webszolgáltatás
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
 
+        BindingList<string> Currencies = new BindingList<string>();
+
+
         public Form1()
         {
-            InitializeComponent();            
+            
+            
 
-            var mnbService = new MNBArfolyamServiceSoapClient();
+            InitializeComponent();
+            GetCurrencies();
 
-            var request = new GetExchangeRatesRequestBody()
-            {
-                currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
-            };
+            comboBox1.DataSource = Currencies;           
 
-            var response = mnbService.GetExchangeRates(request);
+                      
+            
+            RefreshData();
+            
 
-            var result = response.GetExchangeRatesResult;
-
-            ProcessXML(result);
-
-            dataGridView1.DataSource = Rates;
-            Chart(Rates);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            dateTimePicker1.Value = new DateTime(2020, 01, 01);
+            dateTimePicker2.Value = DateTime.Now;
         }
 
         private void ProcessXML(string doc)
@@ -58,6 +56,11 @@ namespace Webszolgáltatás
                 rd.Date = DateTime.Parse(item.GetAttribute("date"));
 
                 var childElement = (XmlElement)item.ChildNodes[0];
+                if (childElement == null)
+                {
+                    continue;
+                }
+
                 rd.Currency = childElement.GetAttribute("curr");
 
                 var unit = decimal.Parse(childElement.GetAttribute("unit"));
@@ -93,7 +96,12 @@ namespace Webszolgáltatás
             chartArea.AxisY.IsStartedFromZero = false;
         }
 
-        private void RefreshData(object sender, EventArgs e)
+        private void OnEdit(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void RefreshData()
         {
             
             var mnbService = new MNBArfolyamServiceSoapClient();
@@ -119,10 +127,34 @@ namespace Webszolgáltatás
 
             ProcessXML(result);
 
-            dataGridView1.Refresh();
+            dataGridView1.DataSource = Rates;
             Chart(Rates);
         }
 
+
+        private void GetCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var request = new GetCurrenciesRequestBody();
+            var response = mnbService.GetCurrencies(request);
+
+            var result = response.GetCurrenciesResult;
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
+
+            foreach (XmlElement item in xml.DocumentElement.ChildNodes[0])
+            {
+                string cr;                
+                cr = item.InnerText;
+                Currencies.Add(cr);
+            }
+
+            Console.WriteLine(Currencies.Count);
+
+
+        }
 
     }
 }
