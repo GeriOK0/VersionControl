@@ -20,6 +20,7 @@ namespace MintaZH
         {
             InitializeComponent();
             FileReader("Summer_olympic_Medals.csv");
+            ComboBoxLoader();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,9 +28,10 @@ namespace MintaZH
 
         }
 
+        //#2
         private void FileReader(string fileName)
         {
-
+            //A használandó állományokat a Data mappába kell feltölteni
             StreamReader reader = new StreamReader(@"Data\"+fileName);
 
             int counter = 0;
@@ -72,9 +74,22 @@ namespace MintaZH
                 counter++;
             }
 
-            Console.WriteLine(results.Count());
+            //Console.WriteLine(results.Count());
           
             
         }
+
+        //#3
+        private void ComboBoxLoader()
+        {
+            List<int> Years = new List<int>();
+
+            Years = (from x in results
+                     orderby x.Year
+                     select x.Year).Distinct().ToList();          
+
+            comboBox1.DataSource = Years;
+        }
+
     }
 }
