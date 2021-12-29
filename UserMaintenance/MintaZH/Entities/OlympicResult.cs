@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MintaZH.NewFolder1
+namespace MintaZH.Entities
 {
     class OlympicsResult
     {
         public int Year { get; set; }
         public string Country { get; set; }
-        public int[] Medals {get; set;}
         public int Position { get; set; }
+        public int[] Medals { get; set; } = new int[3];
+        
     }
 }
