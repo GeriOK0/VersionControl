@@ -20,6 +20,7 @@ namespace MintaZH
         {
             InitializeComponent();
             FileReader("Summer_olympic_Medals.csv");
+            SetPosition();
             ComboBoxLoader();
         }
 
@@ -28,7 +29,7 @@ namespace MintaZH
 
         }
 
-        //#2
+        //#2 adatbeolvasás és results feltöltése
         private void FileReader(string fileName)
         {
             //A használandó állományokat a Data mappába kell feltölteni
@@ -89,6 +90,55 @@ namespace MintaZH
                      select x.Year).Distinct().ToList();          
 
             comboBox1.DataSource = Years;
+        }
+
+        //#4
+        private int GetPosition (OlympicsResult or) {
+
+            //results lista szűrése Year == or.Year && ország != or.Country
+
+            /*szűrt lista végigjárása és counter növelése, ha
+             * aranyak száma nagyobb mint or-nél 
+             * vagy
+             * aranyak száma egyenlő de az ezüsté több mint or-nél
+             * vagy
+             * arany és ezüst száma egyenlő de a bronzé több mint or-nél
+             * 
+             * output counter+1
+             */
+
+            int counter = 0; //or-nél jobban teljesítő országok száma
+
+
+            List<OlympicsResult> filteredResults = (from x in results
+                                                    where
+                                                        x.Year == or.Year &&
+                                                        x.Country != or.Country
+                                                    select x).ToList();
+
+            foreach (var i in filteredResults)
+            {
+                if (
+                    i.Medals[0] > or.Medals[0] ||
+                    (i.Medals[0] == or.Medals[0] && i.Medals[1] > or.Medals[1]) ||
+                    (i.Medals[0] == or.Medals[0] && i.Medals[1] == or.Medals[1] && i.Medals[2] > or.Medals[2])
+                    )
+                {
+                    counter++;
+                };
+            }
+
+            int position = counter + 1;
+
+            return position;
+        }
+
+        private void SetPosition()
+        {
+            foreach (OlympicsResult o in results)
+            {
+                o.Position = GetPosition(o);
+            }
         }
 
     }
