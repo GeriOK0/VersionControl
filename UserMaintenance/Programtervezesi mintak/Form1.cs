@@ -1,4 +1,5 @@
-﻿using Programtervezesi_mintak.Entities;
+﻿using Programtervezesi_mintak.Abstractions;
+using Programtervezesi_mintak.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,10 @@ namespace Programtervezesi_mintak
     public partial class Form1 : Form
     {
 
-        private List<Ball> _balls = new List<Ball>();
+        private List<Toy> _toys = new List<Toy>();
 
-        private BallFactory _factory;
-        private BallFactory Factory
+        private IToyFactory _factory;
+        private IToyFactory Factory
         {
             get { return _factory; }
             set { _factory = value; }
@@ -28,7 +29,8 @@ namespace Programtervezesi_mintak
         public Form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            //Factory = new BallFactory();
+            Factory = new CarFactory();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -40,7 +42,7 @@ namespace Programtervezesi_mintak
         private void createTimer_Tick(object sender, EventArgs e)
         {
             var ball = Factory.CreateNew();
-            _balls.Add(ball);
+            _toys.Add(ball);
             ball.Left = -ball.Width;
             mainPanel.Controls.Add(ball);
         }
@@ -49,9 +51,9 @@ namespace Programtervezesi_mintak
         {
             var maxPosition = 0;
 
-            foreach (var b in _balls)
+            foreach (var b in _toys)
             {
-                b.MoveBall();
+                b.MoveToy();
 
                 if (b.Left > maxPosition)
                 {
@@ -61,10 +63,10 @@ namespace Programtervezesi_mintak
 
             if (maxPosition >= 1000)
             {
-                Ball fst = _balls.First();
+                Toy fst = _toys.First();
 
                 mainPanel.Controls.Remove(fst);
-                _balls.Remove(fst);
+                _toys.Remove(fst);
 
                 //Console.WriteLine(_balls.Count);
             }

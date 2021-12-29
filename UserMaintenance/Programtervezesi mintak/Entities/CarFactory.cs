@@ -1,4 +1,4 @@
-﻿using Programtervezesi_mintak.Abstactions;
+﻿using Programtervezesi_mintak.Abstractions;
 using Programtervezesi_mintak.Abstractions;
 using System;
 using System.Collections.Generic;

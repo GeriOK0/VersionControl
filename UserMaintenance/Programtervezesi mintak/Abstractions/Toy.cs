@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Programtervezesi_mintak.Abstactions
+namespace Programtervezesi_mintak.Abstractions
 {
     public abstract class Toy : Label
     {
