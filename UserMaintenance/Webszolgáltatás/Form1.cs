@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using Webszolgáltatás.Entities;
 using Webszolgáltatás.MnbServiceReference;
 
@@ -34,11 +35,40 @@ namespace Webszolgáltatás
             var response = mnbService.GetExchangeRates(request);
 
             var result = response.GetExchangeRatesResult;
+
+            ProcessXML(result);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void ProcessXML(string doc)
+        {
+            XmlDocument xml = new XmlDocument();
+
+            xml.LoadXml(doc);
+
+            foreach (XmlElement item in xml.DocumentElement)
+            {
+                RateData rd = new RateData();
+                rd.Date = DateTime.Parse(item.GetAttribute("date"));
+
+                var childElement = (XmlElement)item.ChildNodes[0];
+                rd.Currency = childElement.GetAttribute("curr");
+
+                var unit = decimal.Parse(childElement.GetAttribute("unit"));
+                var value = decimal.Parse(childElement.InnerText);
+                if (unit != 0)
+                {
+                    rd.Value = value / unit;
+                }
+
+
+                Rates.Add(rd);
+
+            }
         }
     }
 }

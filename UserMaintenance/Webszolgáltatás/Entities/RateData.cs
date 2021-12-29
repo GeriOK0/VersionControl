@@ -8,8 +8,8 @@ namespace Webszolgáltatás.Entities
 {
     class RateData
     {
-        private DateTime Date { get; set; }
-        private string Currency { get; set; }
-        private decimal Value { get; set; }
+        public DateTime Date { get; set; }
+        public string Currency { get; set; }
+        public decimal Value { get; set; }
     }
 }
