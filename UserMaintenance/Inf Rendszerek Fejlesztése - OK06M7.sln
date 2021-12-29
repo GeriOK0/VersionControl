@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webszolgáltatás", "Webszo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit teszt", "Unit teszt\Unit teszt.csproj", "{73F0E2F4-B026-4AAF-B64A-D14F3F80876C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikroszimuláció", "Mikroszimuláció\Mikroszimuláció.csproj", "{A495CD35-F64F-48BF-ACE0-C85D52629EC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{73F0E2F4-B026-4AAF-B64A-D14F3F80876C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73F0E2F4-B026-4AAF-B64A-D14F3F80876C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73F0E2F4-B026-4AAF-B64A-D14F3F80876C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A495CD35-F64F-48BF-ACE0-C85D52629EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A495CD35-F64F-48BF-ACE0-C85D52629EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A495CD35-F64F-48BF-ACE0-C85D52629EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A495CD35-F64F-48BF-ACE0-C85D52629EC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
