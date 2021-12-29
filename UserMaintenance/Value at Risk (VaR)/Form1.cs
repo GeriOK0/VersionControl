@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Value_at_Risk__VaR_.Entities;
 
 namespace Value_at_Risk__VaR_
 {
@@ -15,6 +16,7 @@ namespace Value_at_Risk__VaR_
 
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
+        List<PortfolioItem> Portfolio = new List<PortfolioItem>();
 
         public Form1()
         {
@@ -22,11 +24,24 @@ namespace Value_at_Risk__VaR_
 
             Ticks = context.Ticks.ToList(); //adattábla memóriába másolása
             dataGridView1.DataSource = Ticks;
+
+            CreatePortfolio();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+        public void CreatePortfolio()
+        {
+            Portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
+
+            dataGridView2.DataSource = Portfolio;
+        }
+
     }
 }
