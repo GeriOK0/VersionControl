@@ -23,28 +23,11 @@ namespace Mikroszimuláció
         public Form1()
         {
             InitializeComponent();
+            numericUpDown1.Minimum = 2006;
+            numericUpDown1.Maximum = 2025;
 
-            Population = GetPopulation(@"C:\Temp\nép.csv");
-            BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
-            DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
-
-            for (int year = 2005; year <= 2024; year++)
-            {
-                // Végigmegyünk az összes személyen
-                for (int i = 0; i < Population.Count; i++)
-                {
-                    // Ide jön a szimulációs lépés
-                }
-
-                int nbrOfMales = (from x in Population
-                                  where x.Gender == Gender.Male && x.IsAlive
-                                  select x).Count();
-                int nbrOfFemales = (from x in Population
-                                    where x.Gender == Gender.Female && x.IsAlive
-                                    select x).Count();
-                Console.WriteLine(
-                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
-            }
+            numericUpDown1.Value = 2010;
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -63,7 +46,7 @@ namespace Mikroszimuláció
             while ((line = reader.ReadLine()) != null)
             {
 
-                string[] arr = line.Split(',');
+                string[] arr = line.Split(';');
 
                 Person it = new Person();
                 it.BirthYear = Convert.ToInt32(arr[0].Trim());
@@ -87,7 +70,7 @@ namespace Mikroszimuláció
             while ((line = reader.ReadLine()) != null)
             {
 
-                string[] arr = line.Split(',');
+                string[] arr = line.Split(';');
 
                 BirthProbability it = new BirthProbability();
                 it.Age = Convert.ToInt32(arr[0].Trim());                
@@ -111,7 +94,7 @@ namespace Mikroszimuláció
             while ((line = reader.ReadLine()) != null)
             {
 
-                string[] arr = line.Split(',');
+                string[] arr = line.Split(';');
 
                 DeathProbability it = new DeathProbability();
                 it.Gender = (Gender)Enum.Parse(typeof(Gender), arr[0]);
@@ -124,9 +107,37 @@ namespace Mikroszimuláció
             return list;
         }
 
+        private void Simulation(decimal y)
+        {
+            Population = GetPopulation(@"C:\Temp\nép.csv");
+            BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
+            DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
 
+            for (int year = 2005; year <= y; year++)
+            {
+                int count = 0;
+                List<Person> yearlyNewBorn = new List<Person>();
 
-        private void SimStep(int year, Person person)
+                foreach (Person p in Population)
+                {
+                    SimStep(year, p, yearlyNewBorn);
+                    count++;
+                }
+
+                Population.AddRange(yearlyNewBorn);
+
+                int nbrOfMales = (from x in Population
+                                  where x.Gender == Gender.Male && x.IsAlive
+                                  select x).Count();
+                int nbrOfFemales = (from x in Population
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
+                Console.WriteLine(
+                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+            }
+        }
+
+        private void SimStep(int year, Person person, List<Person> lst)
         {
             //Ha halott akkor kihagyjuk, ugrunk a ciklus következő lépésére
             if (!person.IsAlive) return;
@@ -157,14 +168,14 @@ namespace Mikroszimuláció
                     újszülött.BirthYear = year;
                     újszülött.NbrOfChildren = 0;
                     újszülött.Gender = (Gender)(rnd.Next(1, 3));
-                    Population.Add(újszülött);
+                    lst.Add(újszülött);
                 }
             }
         }
 
-
-
-
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Simulation(numericUpDown1.Value);
+        }
     }
 }
