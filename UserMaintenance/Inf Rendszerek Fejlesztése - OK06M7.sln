@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Value at Risk (VaR)", "Valu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintaZH", "MintaZH\MintaZH.csproj", "{AD162AC4-884F-4655-ACEF-B6462C545ACA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Programtervezesi mintak", "Programtervezesi mintak\Programtervezesi mintak.csproj", "{67553D9A-3BA3-4E4B-A373-D1570DA21B12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{AD162AC4-884F-4655-ACEF-B6462C545ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD162AC4-884F-4655-ACEF-B6462C545ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD162AC4-884F-4655-ACEF-B6462C545ACA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67553D9A-3BA3-4E4B-A373-D1570DA21B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67553D9A-3BA3-4E4B-A373-D1570DA21B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67553D9A-3BA3-4E4B-A373-D1570DA21B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67553D9A-3BA3-4E4B-A373-D1570DA21B12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
