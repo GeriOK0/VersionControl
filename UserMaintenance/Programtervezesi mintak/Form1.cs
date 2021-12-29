@@ -83,9 +83,19 @@ namespace Programtervezesi_mintak
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory { 
+            Factory = new BallFactory 
+            { 
 
                 BallColor = button3.BackColor 
+            };
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                BoxColor = button3.BackColor,
+                RibbonColor = button5.BackColor
             };
         }
 
@@ -105,7 +115,7 @@ namespace Programtervezesi_mintak
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ChangeBgColor(object sender, EventArgs e)
         {
             Button button = (Button)sender;
 
@@ -120,9 +130,10 @@ namespace Programtervezesi_mintak
             else
             {
                 button.BackColor = colorPicker.Color;
-            }                
+            }
             
-
         }
+
+        
     }
 }
