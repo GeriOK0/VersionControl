@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserMaintenance", "UserMain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel generálás", "Excel generálás\Excel generálás.csproj", "{1DBD6FDC-C3FA-48F6-911F-5E44C0265253}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Value at Risk (VaR)", "Value at Risk (VaR)\Value at Risk (VaR).csproj", "{BDE0CFAA-DD4C-4E37-8D0F-E6923D1C2D2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1DBD6FDC-C3FA-48F6-911F-5E44C0265253}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DBD6FDC-C3FA-48F6-911F-5E44C0265253}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DBD6FDC-C3FA-48F6-911F-5E44C0265253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDE0CFAA-DD4C-4E37-8D0F-E6923D1C2D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE0CFAA-DD4C-4E37-8D0F-E6923D1C2D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE0CFAA-DD4C-4E37-8D0F-E6923D1C2D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE0CFAA-DD4C-4E37-8D0F-E6923D1C2D2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
