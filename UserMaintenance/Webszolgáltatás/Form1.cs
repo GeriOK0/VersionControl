@@ -92,5 +92,37 @@ namespace Webszolgáltatás
             chartArea.AxisY.MajorGrid.Enabled = false;
             chartArea.AxisY.IsStartedFromZero = false;
         }
+
+        private void RefreshData(object sender, EventArgs e)
+        {
+            
+            var mnbService = new MNBArfolyamServiceSoapClient();
+
+            var startD = dateTimePicker1.Value.ToString();
+            var endD = dateTimePicker2.Value.ToString();
+            var cur = comboBox1.Text;
+
+            Console.WriteLine(@"StartD: {0}, EndD: {1}, Currency: {2}", startD, endD, cur);
+
+            var request = new GetExchangeRatesRequestBody()
+            {
+                currencyNames = cur,
+                startDate = startD,
+                endDate = endD,
+            };
+
+            var response = mnbService.GetExchangeRates(request);
+
+            var result = response.GetExchangeRatesResult;
+
+            Rates.Clear();
+
+            ProcessXML(result);
+
+            dataGridView1.Refresh();
+            Chart(Rates);
+        }
+
+
     }
 }
