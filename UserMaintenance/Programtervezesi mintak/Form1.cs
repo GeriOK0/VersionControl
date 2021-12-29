@@ -22,8 +22,12 @@ namespace Programtervezesi_mintak
         private IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set { _factory = value;
+                DisplayNext();
+            }
         }
+
+        private Toy _nextToy;
         
 
         public Form1()
@@ -70,6 +74,52 @@ namespace Programtervezesi_mintak
 
                 //Console.WriteLine(_balls.Count);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+            {
+                Controls.Remove(_nextToy);
+            }
+
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = label1.Top + label1.Height + 20;
+            _nextToy.Left = label1.Left;
+            Controls.Add(_nextToy);
+            
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            var colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            else
+            {
+                button.BackColor = colorPicker.Color;
+            }                
+            
+
         }
     }
 }
