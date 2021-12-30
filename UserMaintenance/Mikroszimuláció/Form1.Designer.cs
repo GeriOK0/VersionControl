@@ -71,6 +71,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(239, 20);
             this.textBox1.TabIndex = 3;
+            this.textBox1.Click += new System.EventHandler(this.SelectPopulationSource);
             // 
             // button1
             // 
@@ -80,6 +81,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Browse";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.SelectPopulationSource);
             // 
             // button2
             // 

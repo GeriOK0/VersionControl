@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace Mikroszimuláció
@@ -17,6 +19,7 @@ namespace Mikroszimuláció
         List<Person> Population = new List<Person>();
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
+        List<string> results = new List<string>();
 
         Random rnd = new Random(23);
 
@@ -27,7 +30,8 @@ namespace Mikroszimuláció
             numericUpDown1.Maximum = 2025;
 
             numericUpDown1.Value = 2010;
-           
+            textBox1.Text = @"C:\temp\nép.csv";
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,16 +111,19 @@ namespace Mikroszimuláció
             return list;
         }
 
-        private void Simulation(decimal y)
-        {
+        private void Simulation(decimal y, string popSource)       {
+            
+
             Population = GetPopulation(@"C:\Temp\nép.csv");
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
-            DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
+            DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");            
 
             for (int year = 2005; year <= y; year++)
             {
+                
                 int count = 0;
                 List<Person> yearlyNewBorn = new List<Person>();
+                
 
                 foreach (Person p in Population)
                 {
@@ -134,6 +141,14 @@ namespace Mikroszimuláció
                                     select x).Count();
                 Console.WriteLine(
                     string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+
+                string message = String.Format("Szimulációs év: {0}\n\tFiúk: {1}\n\tLányok: {2}\n",
+                      year,
+                      nbrOfMales,
+                      nbrOfFemales
+                      );
+
+                results.Add(message);
             }
         }
 
@@ -175,7 +190,41 @@ namespace Mikroszimuláció
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Simulation(numericUpDown1.Value);
+            richTextBox1.Clear();
+            Simulation(numericUpDown1.Value, textBox1.Text);
+           
+            DisplayResults(results);
+            results.Clear();
+        }
+        private void SelectPopulationSource(object sender, EventArgs e)
+        {
+            OpenFileDialog ofDial = new OpenFileDialog();
+
+            string filter = "CSV file (*.csv)|*.csv| All Files (*.*)|*.*";
+            ofDial.Filter = filter;
+            ofDial.InitialDirectory = "C:\temp";         
+
+
+
+            if (ofDial.ShowDialog() == DialogResult.OK)
+            {
+
+                string fname = ofDial.FileName;
+
+
+                textBox1.Text = fname;
+            }
+        }
+
+       private void DisplayResults(List<string> arr)
+        {
+            foreach (var item in arr)
+            {
+                richTextBox1.AppendText(item.ToString());
+            }
+
         }
     }
+
+
 }
