@@ -17,15 +17,15 @@ namespace ElőzőAnyagok
         public char nem { get; set; }
 
 
-        private string teljesNév
+        public string teljesNév
         {
             get {
 
-                return this.keresztnév + "-" + this.vezetéknév;
+                return this.vezetéknév + "-" + this.keresztnév;
             }
         }
 
-        private int kor
+        public int kor
         {
             get {
                 DateTime nw = DateTime.Now;
@@ -70,7 +70,11 @@ namespace ElőzőAnyagok
                     this.BackColor = Color.White;
                     break;
             }
+
+            
+            this.Click += ButtonClick;
         }
+
 
         public void ButtonClick(object sender, EventArgs e)
         {
@@ -80,10 +84,12 @@ namespace ElőzőAnyagok
 
         public string GetMonogram()
         {
-            string first = this.vezetéknév.Substring(1).ToUpper();
-            string second = this.keresztnév.Substring(1).ToUpper();
+            string first = this.vezetéknév.Substring(0,1).ToUpper();
+            string second = this.keresztnév.Substring(0,1).ToUpper();
             return first + second;
         }
+
+   
 
 
     }

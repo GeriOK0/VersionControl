@@ -20,6 +20,7 @@ namespace ElőzőAnyagok
         {
             InitializeComponent();
             tb_nem.MaxLength = 1;
+            panel1.AutoScroll = true;
             
             
         }
@@ -83,5 +84,46 @@ namespace ElőzőAnyagok
 
             Console.WriteLine("Emberek száma: " + emberek.Count);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int top = 0;
+            int left = 0;
+            int margin = 5;
+
+            foreach (Ember hm in emberek)
+            {
+                hm.Text = hm.GetMonogram();
+                hm.Top = top + margin;
+                hm.Left = left + margin;
+                panel1.Controls.Add(hm);
+
+                hm.MouseEnter += MouseEnt;
+                hm.MouseLeave += MouseLv;
+
+                left += hm.Height;
+            }
+        }
+
+        private void MouseLv(object sender, EventArgs e)
+        {
+            tb_kName.ResetText();
+            tb_vName.ResetText();
+            tb_szülIdő.ResetText();
+            tb_nem.ResetText();
+
+        }
+        private void MouseEnt(object sender, EventArgs e)
+        {
+            Ember hm = (Ember)sender;
+
+            tb_kName.Text = hm.keresztnév;
+            tb_vName.Text = hm.vezetéknév;
+            tb_szülIdő.Text = hm.szuletesiDatum.ToString();
+            tb_nem.Text = hm.nem.ToString();
+             
+
+        }
+
     }
 }
