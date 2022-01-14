@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikroszimuláció", "Mikros
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evolúciós algoritmus", "Evolúciós algoritmus\Evolúciós algoritmus.csproj", "{ECC01103-E7EB-4934-B998-D1CB0F359E4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElőzőAnyagok", "ElőzőAnyagok\ElőzőAnyagok.csproj", "{D94C06FD-FB86-49E9-A0F9-0707FA20D4E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{ECC01103-E7EB-4934-B998-D1CB0F359E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECC01103-E7EB-4934-B998-D1CB0F359E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECC01103-E7EB-4934-B998-D1CB0F359E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D94C06FD-FB86-49E9-A0F9-0707FA20D4E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D94C06FD-FB86-49E9-A0F9-0707FA20D4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D94C06FD-FB86-49E9-A0F9-0707FA20D4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D94C06FD-FB86-49E9-A0F9-0707FA20D4E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
